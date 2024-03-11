@@ -6,7 +6,7 @@ export default function Search() {
   const navigate = useNavigate();
   const [sidebardata, setSidebardata] = useState({
     searchTerm: '',
-    type: 'all',
+    condition: 'all',
     parking: false,
     furnished: false,
     offer: false,
@@ -21,7 +21,7 @@ export default function Search() {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
-    const typeFromUrl = urlParams.get('type');
+    const conditionFromUrl = urlParams.get('condition');
     const parkingFromUrl = urlParams.get('parking');
     const furnishedFromUrl = urlParams.get('furnished');
     const offerFromUrl = urlParams.get('offer');
@@ -30,7 +30,7 @@ export default function Search() {
 
     if (
       searchTermFromUrl ||
-      typeFromUrl ||
+      conditionFromUrl ||
       parkingFromUrl ||
       furnishedFromUrl ||
       offerFromUrl ||
@@ -39,7 +39,7 @@ export default function Search() {
     ) {
       setSidebardata({
         searchTerm: searchTermFromUrl || '',
-        type: typeFromUrl || 'all',
+        condition: conditionFromUrl || 'all',
         parking: parkingFromUrl === 'true' ? true : false,
         furnished: furnishedFromUrl === 'true' ? true : false,
         offer: offerFromUrl === 'true' ? true : false,
@@ -72,7 +72,7 @@ export default function Search() {
       e.target.id === 'rent' ||
       e.target.id === 'sale'
     ) {
-      setSidebardata({ ...sidebardata, type: e.target.id });
+      setSidebardata({ ...sidebardata, condition: e.target.id });
     }
 
     if (e.target.id === 'searchTerm') {
@@ -104,7 +104,7 @@ export default function Search() {
     e.preventDefault();
     const urlParams = new URLSearchParams();
     urlParams.set('searchTerm', sidebardata.searchTerm);
-    urlParams.set('type', sidebardata.type);
+    urlParams.set('condition', sidebardata.condition);
     urlParams.set('parking', sidebardata.parking);
     urlParams.set('furnished', sidebardata.furnished);
     urlParams.set('offer', sidebardata.offer);
@@ -145,14 +145,14 @@ export default function Search() {
             />
           </div>
           <div className='flex gap-2 flex-wrap items-center'>
-            <label className='font-semibold'>Type:</label>
+            <label className='font-semibold'>condition:</label>
             <div className='flex gap-2'>
               <input
                 type='checkbox'
                 id='all'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.type === 'all'}
+                checked={sidebardata.condition === 'all'}
               />
               <span>Rent & Sale</span>
             </div>
@@ -162,7 +162,7 @@ export default function Search() {
                 id='rent'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.type === 'rent'}
+                checked={sidebardata.condition === 'rent'}
               />
               <span>Rent</span>
             </div>
@@ -172,7 +172,7 @@ export default function Search() {
                 id='sale'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.type === 'sale'}
+                checked={sidebardata.condition === 'sale'}
               />
               <span>Sale</span>
             </div>
@@ -187,29 +187,7 @@ export default function Search() {
               <span>Offer</span>
             </div>
           </div>
-          <div className='flex gap-2 flex-wrap items-center'>
-            <label className='font-semibold'>Amenities:</label>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='parking'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.parking}
-              />
-              <span>Parking</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='furnished'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.furnished}
-              />
-              <span>Furnished</span>
-            </div>
-          </div>
+          
           <div className='flex items-center gap-2'>
             <label className='font-semibold'>Sort:</label>
             <select

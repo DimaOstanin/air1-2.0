@@ -25,10 +25,7 @@ export default function CreateListing() {
     condition: '',
     category: '',
     regularPrice: 50,
-    discountPrice: 0,
-    offer: false,
     
-    furnished: false,
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -96,28 +93,19 @@ export default function CreateListing() {
   };
 
   const handleChange = (e) => {
-    if (e.target.id === 'sale' || e.target.id === 'rent') {
+    if (e.target.id === 'condition' || e.target.id === 'category') {
       setFormData({
         ...formData,
-        type: e.target.id,
+        [e.target.id]: e.target.value,
       });
     }
-
-    if (
-      e.target.id === 'parking' ||
-      e.target.id === 'furnished' ||
-      e.target.id === 'offer'
-    ) {
-      setFormData({
-        ...formData,
-        [e.target.id]: e.target.checked,
-      });
-    }
+    
+    
 
     if (
       e.target.type === 'number' ||
       e.target.type === 'text' ||
-      e.target.type === 'textarea'
+      e.target.type === 'textarea' 
     ) {
       setFormData({
         ...formData,
@@ -192,10 +180,19 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.address}
           />
+          <input
+            type='text'
+            placeholder=' חברה'
+            className='border p-3 rounded-lg direction-rtl text-right'
+            id='company'
+            required
+            onChange={handleChange}
+            value={formData.company}
+          />
           <div className='flex gap-6 flex-wrap'>
             <div className='flex flex-row gap-2'>
             
-            <select className='border p-3 rounded-lg'>
+            <select className='border p-3 rounded-lg' id='condition' onChange={handleChange}>
             
               {goodsCondition.map((condition)=>
                 <option className='direction-rtl text-right' value={condition} key={condition}>{condition}</option>
@@ -206,7 +203,7 @@ export default function CreateListing() {
             </div>
             <div className='flex flex-row direction-rtl gap-2 justify-end'>
             
-            <select className='border p-3 rounded-lg direction-rtl item-right '>
+            <select className='border p-3 rounded-lg direction-rtl item-right '  id='category' onChange={handleChange}>
             
               {goodsCategory.map((condition)=>
                 <option className='direction-rtl text-right' value={condition} key={condition}>{condition}</option>

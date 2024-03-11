@@ -27,8 +27,10 @@ export default function Header() {
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
         <Link to='/'>
           <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-            <span className='text-slate-500'>Sahand</span>
-            <span className='text-slate-700'>Estate</span>
+          <img src="../images/israel.png" alt="israel-flag" className='h-9 '/>
+            <span className='text-slate-500'>AIRSOFT-</span>
+            <span className='text-slate-700'>1</span>
+            
           </h1>
         </Link>
         <form
@@ -49,12 +51,17 @@ export default function Header() {
         <ul className='flex gap-4'>
           <Link to='/'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Home
+              בית
+            </li>
+          </Link>
+          <Link to='/shuk'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+            שוק 
             </li>
           </Link>
           <Link to='/about'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>
-              About
+            אודות
             </li>
           </Link>
           <Link to='/profile'>
@@ -65,7 +72,7 @@ export default function Header() {
                 alt='profile'
               />
             ) : (
-              <li className=' text-slate-700 hover:underline'> Sign in</li>
+              <li className=' text-slate-700 hover:underline'> להתחבר</li>
             )}
           </Link>
         </ul>
