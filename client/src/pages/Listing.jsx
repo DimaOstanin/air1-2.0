@@ -6,20 +6,18 @@ import { useSelector } from "react-redux";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import { Link } from "react-router-dom";
+import { FaMapMarkerAlt, FaShare } from "react-icons/fa";
 import {
-  FaBath,
-  FaBed,
-  FaChair,
-  FaMapMarkedAlt,
-  FaMapMarkerAlt,
-  FaParking,
-  FaShare,
-} from "react-icons/fa";
+  TelegramShareButton,TelegramIcon,
+  WhatsappShareButton,WhatsappIcon,
+} from "react-share";
+
 import Contact from "../components/Contact";
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
 export default function Listing() {
+  const shareUrl = "https://www.npmjs.com/package/react-share"; // window.location.href
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -27,13 +25,17 @@ export default function Listing() {
   const [copied, setCopied] = useState(false);
   const [contact, setContact] = useState(false);
   const [userListings, setUserListings] = useState([]);
+  console.log(userListings)
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
+    
     fetchListing();
-    handleShowListings();
+    UserListings();
   }, [params.listingId]);
+
+  
   const fetchListing = async () => {
     try {
       setLoading(true);
@@ -52,9 +54,9 @@ export default function Listing() {
       setLoading(false);
     }
   };
-  const handleShowListings = async () => {
+  const UserListings = async () => {
     try {
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`/api/user/listings/${listing.userRef}`);
       const data = await res.json();
       if (data.success === false) {
         return;
@@ -63,11 +65,12 @@ export default function Listing() {
       setUserListings(data);
     } catch (error) {}
   };
+  
   return (
     <main>
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
       {error && (
-        <p className="text-center my-7 text-2xl">Something went wrong!</p>
+        <p className="text-center my-7 text-2xl">Something  went wrong!</p>
       )}
       {listing && !loading && !error && (
         <div>
@@ -140,6 +143,16 @@ export default function Listing() {
           </div>
         </div>
       )}
+      <div className="flex justify-around ">
+      <TelegramShareButton url={shareUrl}>
+          <TelegramIcon />
+        </TelegramShareButton>
+        <WhatsappShareButton url={shareUrl}>
+          <WhatsappIcon />
+        </WhatsappShareButton>
+        <h1 className="text-center mt-7 text-2xl font-semibold">שיתוף</h1>
+
+      </div>
       <div>
         {userListings && userListings.length > 0 && (
           <div className="flex flex-col gap-4">
