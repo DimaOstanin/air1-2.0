@@ -53,6 +53,7 @@ export default function Home() {
         </div>
       </div>
       <hr className="m-3"></hr>
+      <h1 className="text-2xl font-semibold text-slate-600  mb-3 text-center">גלריה תמונות של מודעות</h1>
       {/* swiper */}
       <Swiper navigation>
         {listings.map((listing) => (
@@ -76,7 +77,7 @@ export default function Home() {
 
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-1">
         
-          <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl text-center">ציוד אחרון שעלה לאתר</h1>
+          <h2 className="text-slate-700 font-bold text-2xl lg:text-4xl text-center">ציוד אחרון שעלה לאתר</h2>
           <div className="">
             <div className="my-1">
               <h2 className="text-2xl font-semibold text-slate-600  text-right">כלי אקדח</h2>
