@@ -40,6 +40,9 @@ const listingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userPhone:{
+      type: String,
+    }
   },
   { timestamps: true }
 );

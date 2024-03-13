@@ -251,12 +251,13 @@ export default function Profile() {
         <p className="text-green-700 mt-0.1 text-right">
           {updateSuccess ? "המשתמש עודכן בהצלחה!" : ""}
         </p>
-        <Link
+        {currentUser.phone? <Link
           className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
           to={"/create-listing"}
         >
-          ליצור מודעה{" "}
-        </Link>
+          להקים מודעה {" "}
+        </Link> :
+         <p className="flex justify-center">יש להשלים נתונים בשביל להקים מודעה</p>}
       </form>
       <div className="flex justify-between mt-5">
         <span
@@ -270,12 +271,12 @@ export default function Profile() {
         </span>
       </div>
 
-      <button
-        onClick={handleShowListings}
-        className="text-black w-full bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 p-3 rounded-lg uppercase text-center hover:opacity-95"
-      >
-        הצג מודעות שלך
-      </button>
+         <button
+          onClick={handleShowListings}
+          className="text-black w-full bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 p-3 rounded-lg uppercase text-center hover:opacity-95"
+        >
+          הצג מודעות שלך
+        </button>
       <p className="text-red-700 mt-5">
         {showListingsError ? "שגיאה בהצגת" : ""}
       </p>

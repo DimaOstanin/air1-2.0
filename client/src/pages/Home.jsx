@@ -7,44 +7,31 @@ import "swiper/css/bundle";
 import ListingItem from "../components/ListingItem";
 
 export default function Home() {
-  const [offerListings, setOfferListings] = useState([]);
-  const [saleListings, setSaleListings] = useState([]);
-  const [rentListings, setRentListings] = useState([]);
+  const [listings, setListings] = useState([]);
+ 
   SwiperCore.use([Navigation]);
-  console.log(offerListings);
+  console.log(listings);
+  
   useEffect(() => {
-    const fetchOfferListings = async () => {
+    const fetchListings = async () => {
       try {
-        const res = await fetch("/api/listing/get?condition=true&limit=4");
+        const res = await fetch("/api/listing/get");
         const data = await res.json();
-        setOfferListings(data);
-        fetchRentListings();
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const fetchRentListings = async () => {
-      try {
-        const res = await fetch("/api/listing/get?category=rent&limit=4");
-        const data = await res.json();
-        setRentListings(data);
-        fetchSaleListings();
+        setListings(data);
+        
       } catch (error) {
         console.log(error);
       }
     };
 
-    const fetchSaleListings = async () => {
-      try {
-        const res = await fetch("/api/listing/get?type=sale&limit=4");
-        const data = await res.json();
-        setSaleListings(data);
-      } catch (error) {
-        log(error);
-      }
-    };
-    fetchOfferListings();
+    fetchListings();
+    
   }, []);
+  const pistols = "אקדח";
+  const bigguns = "כלי חשמלי "&& " כלי צלפים"&&"כלי על גז"&&"כלי HPA" ;
+  const accessories = "(על הכלי)אביזרים";
+  const spareParts = "(פנימי)חלקי חילוף";
+  
   return (
     <div className="">
       {/* top */}
@@ -56,7 +43,7 @@ export default function Home() {
           למקום הטוב ביותר לשחקני איירסופט
         </h1>
         <div className="text-gray-500 text-right text-xs sm:text-sm">
-          בהמשך לפיתוח אתר תוכלו להנות ממגוון שירותים שהמון זמן רציתם 
+          בהמשך לפיתוח אתר תוכלו להנות ממגוון שירותים שהמון זמן רציתם
           <br />
           משחקים גדולים ,הצטרפות לקבוצה, מידה לשחקנים חדשים
           <br />
@@ -65,13 +52,12 @@ export default function Home() {
           רק אל תשכחו להתחבר ולהשלים נתונים שלכם
         </div>
       </div>
-
+      <hr className="m-3"></hr>
       {/* swiper */}
       <Swiper navigation>
-        {offerListings &&
-          offerListings.length > 0 &&
-          offerListings.map((listing) => (
+        {listings.map((listing) => (
             <SwiperSlide>
+              <Link to={`/listing/${listing._id}`}>
               <div
                 style={{
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
@@ -80,73 +66,63 @@ export default function Home() {
                 className="h-[500px]"
                 key={listing._id}
               ></div>
+              </Link>
+              
             </SwiperSlide>
           ))}
       </Swiper>
 
       {/* listing results for offer, sale and rent */}
 
-      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
-        {offerListings && offerListings.length > 0 && (
+      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-1">
+        
+          <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl text-center">ציוד אחרון שעלה לאתר</h1>
           <div className="">
-            <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">
-                Recent offers
-              </h2>
-              <Link
-                className="text-sm text-blue-800 hover:underline"
-                to={"/search?offer=true"}
-              >
-                Show more offers
-              </Link>
+            <div className="my-1">
+              <h2 className="text-2xl font-semibold text-slate-600  text-right">כלי אקדח</h2>
             </div>
             <div className="flex flex-wrap gap-4">
-              {offerListings.map((listing) => (
+              {listings.filter((object) => object.category === pistols).reverse().slice(0, 1).map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
             </div>
           </div>
-        )}
-        {rentListings && rentListings.length > 0 && (
+          <hr></hr> 
           <div className="">
-            <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">
-                Recent places for rent
-              </h2>
-              <Link
-                className="text-sm text-blue-800 hover:underline"
-                to={"/search?type=rent"}
-              >
-                Show more places for rent
-              </Link>
+            <div className="my-1">
+              <h2 className="text-2xl font-semibold text-slate-600 text-right">כלי ארוך</h2>
             </div>
             <div className="flex flex-wrap gap-4">
-              {rentListings.map((listing) => (
+              {listings.filter((object) => object.category === bigguns).reverse().slice(0, 1).map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
             </div>
           </div>
-        )}
-        {saleListings && saleListings.length > 0 && (
+          <hr></hr>
           <div className="">
-            <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">
-                Recent places for sale
-              </h2>
-              <Link
-                className="text-sm text-blue-800 hover:underline"
-                to={"/search?type=sale"}
-              >
-                Show more places for sale
-              </Link>
+            <div className="my-1">
+              <h2 className="text-2xl font-semibold text-slate-600 text-right">אביזר לכלי </h2>
             </div>
             <div className="flex flex-wrap gap-4">
-              {saleListings.map((listing) => (
+              {listings.filter((object) => object.category === accessories).reverse().slice(0, 1).map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
             </div>
           </div>
-        )}
+          <hr></hr>
+          <div className="">
+            <div className="my-1">
+              <h2 className="text-2xl font-semibold text-slate-600 text-right">חלקי חילוף</h2>
+            </div>
+            <div className="flex flex-wrap gap-4">
+              {listings.filter((object) => object.category === spareParts).reverse().slice(0, 1).map((listing) => (
+                <ListingItem listing={listing} key={listing._id} />
+              ))}
+            </div>
+          </div>
+          <hr></hr>
+          
+        
       </div>
     </div>
   );

@@ -1,52 +1,71 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function Contact({ listing }) {
-  const [landlord, setLandlord] = useState(null);
-  const [message, setMessage] = useState('');
-  const onChange = (e) => {
+export default function Contact({ currentUser }) {
+  // const [landlord, setLandlord] = useState(null);
+  const [message, setMessage] = useState("");
+  const [subject, setSubject] = useState("");
+  const onChangeMessage = (e) => {
     setMessage(e.target.value);
   };
+  const onChangeSubject = (e) => {
+    setSubject(e.target.value);
+  };
 
-  useEffect(() => {
-    const fetchLandlord = async () => {
-      try {
-        const res = await fetch(`/api/user/${listing.userRef}`);
-        const data = await res.json();
-        setLandlord(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchLandlord();
-  }, [listing.userRef]);
+  // useEffect(() => {
+  //   const fetchLandlord = async () => {
+  //     try {
+  //       const res = await fetch(`/api/user/${currentUser.userRef}`);
+  //       const data = await res.json();
+  //       setLandlord(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchLandlord();
+  // }, [listing.userRef]);
   return (
     <>
-      {landlord && (
-        <div className='flex flex-col gap-2'>
-          <p>
-            Contact <span className='font-semibold'>{landlord.username}</span>{' '}
-            for{' '}
-            <span className='font-semibold'>{listing.name.toLowerCase()}</span>
-          </p>
-          <textarea
-            name='message'
-            id='message'
-            rows='2'
-            value={message}
-            onChange={onChange}
-            placeholder='Enter your message here...'
-            className='w-full border p-3 rounded-lg'
-          ></textarea>
+      <div className="flex flex-col gap-2">
+        {/* <p className="flex justify-end space-x-10 pr-10">
+          <span className="font-semibold">
+            {currentUser.username + " " + " : שמך"}
+          </span>{" "}
+        </p>
+        <p className="flex justify-end space-x-10 pr-10">
+          {" "}
+          <span className="font-semibold">
+            {currentUser.email + " " + "- : אימייל שלך"}
+          </span>
+        </p> */}
+        <textarea
+          name="subject"
+          id="subject"
+          rows="2"
+          value={subject}
+          onChange={onChangeSubject}
+          placeholder="הכנס את הנושא שלך כאן..."
+          className="w-full border p-0.5 rounded-lg derection-rtl text-right space-x-10"
+        ></textarea>
+        <textarea
+          name="message"
+          id="message"
+          rows="2"
+          value={message}
+          onChange={onChangeMessage}
+          placeholder="הכנס את הודעתך כאן..."
+          className="w-full border p-3 rounded-lg text-right space-x-10"
+        ></textarea>
 
-          <Link
-          to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
-          className='bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95'
-          >
-            Send Message          
-          </Link>
-        </div>
-      )}
+        <Link
+          to={`mailto:airsoft1israel@gmail.com?subject=${
+            currentUser.name + "   " + subject
+          }&body=${message}`}
+          className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
+        >
+          שלח הודעה
+        </Link>
+      </div>
     </>
   );
 }

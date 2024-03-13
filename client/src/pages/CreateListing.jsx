@@ -33,7 +33,7 @@ export default function CreateListing() {
   const [loading, setLoading] = useState(false);
   console.log(formData);
   const handleImageSubmit = (e) => {
-    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+    if (files.length > 0 && files.length + formData.imageUrls.length < 2) {
       setUploading(true);
       setImageUploadError(false);
       const promises = [];
@@ -51,11 +51,11 @@ export default function CreateListing() {
           setUploading(false);
         })
         .catch((err) => {
-          setImageUploadError('Image upload failed (2 mb max per image)');
+          setImageUploadError('העלאת התמונה נכשלה (מקסימום 2 מגה לתמונה)');
           setUploading(false);
         });
     } else {
-      setImageUploadError('You can only upload 6 images per listing');
+      setImageUploadError('אפשר להעלות רק תמונה אחת למודעה');
       setUploading(false);
     }
   };
@@ -131,6 +131,7 @@ export default function CreateListing() {
         body: JSON.stringify({
           ...formData,
           userRef: currentUser._id,
+          userPhone: currentUser.phone,
         }),
       });
       const data = await res.json();
@@ -235,13 +236,10 @@ export default function CreateListing() {
         
         </div>
         <div className='flex flex-col flex-1 gap-4'>
-          <div className='flex flex-row '>
-          <span className='font-normal text-gray-600 ml-2'>
-          תמונה ראשונה ראשית עד (6)
-            </span>
-          <p className='font-semibold'>
-          :תמונות
-            
+          <div className='flex flex-row justify-center'>
+          
+          <p className='font-semibold flex flex-row justify-end'>
+          תמונה
           </p>
           </div>
         

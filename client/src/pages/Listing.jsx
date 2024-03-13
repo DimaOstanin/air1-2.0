@@ -25,7 +25,7 @@ export default function Listing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [contact, setContact] = useState(false);
+  
   const [userListings, setUserListings] = useState([]);
   console.log(userListings);
   const params = useParams();
@@ -130,10 +130,12 @@ export default function Listing() {
                 - תיאור{" "}
               </span>
             </p>
-            <hr></hr>
-            <div className="m-3 flex flex-row justify-end space-x-20">
+            
+
+          { currentUser && listing.userRef !== currentUser._id &&  <div className="m-3 flex flex-row justify-end space-x-20">
+          <hr></hr>
               <a
-                href={`https://wa.me/${currentUser.phone}?text=${window.location.href}`}
+                href={`https://wa.me/${listing.userPhone}?text=${window.location.href}`}
                 className="whatsapp_float"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -142,19 +144,9 @@ export default function Listing() {
               </a>
               <h1 className="text-center mt-1 text-2xl font-semibold">צור קשר עם המוכר</h1>
 
-            </div>
+            </div>}
             <hr></hr>
-            {/* <div>
-               {currentUser && listing.userRef !== currentUser._id && !contact && (
-              <button
-                onClick={() => setContact(true)}
-                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
-              >
-                Contact landlord
-              </button>
-            )}
-            {contact && <Contact listing={listing} />}
-            </div> */}
+            
            
           </div>
         </div>
