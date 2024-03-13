@@ -23,7 +23,7 @@ export default function Header() {
     }
   }, [location.search]);
   return (
-    <header className='bg-gradient-to-r from-green-700 via-green-500 to-green-800'>
+    <header className='bg-slate-200 shadow-md'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
         <Link to='/'>
           <h1 className='font-bold items-center text-sm sm:text-xl flex flex-wrap'>

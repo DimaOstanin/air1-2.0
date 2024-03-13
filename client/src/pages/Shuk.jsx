@@ -32,6 +32,11 @@ export default function Shuk() {
       setLoading(false);
     }
   };
+  const handleChange = (e) => {
+   
+      setSort(e.target.value);
+    
+  }
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value.toLowerCase());
@@ -66,21 +71,33 @@ export default function Shuk() {
       {error && (
         <p className="text-center my-7 text-2xl">משהו השתבש!</p>
       )}
-      <div className='flex flex-wrap gap-4 p-3 justify-between'>
-      
-      <div className="flex gap-4 ">
-        <button className="bg-teal-400 w-full max-w-[300px] text-black text-center p-1 rounded-md shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)]" onClick={() => setSort('lowest')}> ₪ מהנמוך לגבוה  </button>
-        <button className="bg-teal-400 w-full max-w-[300px] text-black text-center p-1 rounded-md  shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)]" onClick={() => setSort('highest')}>  ₪ מהגבוה לנמוך </button>
-        <button className="bg-teal-500 w-full max-w-[300px] text-black text-center p-1 rounded-md shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)]" onClick={() => setSort('newest')}>החדש ביותר</button>
-        <button className="bg-teal-500 w-full max-w-[300px] text-black text-center p-1 rounded-md shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)]" onClick={() => setSort('oldest')}>הוותיק ביותר</button>
-      </div>
-      <input
+      <div className='flex flex-wrap flex-row gap-4 p-3 '>
+      <div className='flex flex-wrap flex-row gap-4 p-3 justify-end'>
+        <div>
+      <select  className=" text-black p-3 rounded-lg uppercase text-center shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)]" id='sort' onChange={ handleChange}>
+        
+        <option value="lowest">מהנמוך לגבוה </option>
+        <option value="highest"> מהגבוה לנמוך </option>
+        
+      </select>
+        </div>
+        <div>
+      <select  className=" text-black p-3 rounded-lg uppercase text-center shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)]" id='howOld' onChange={ handleChange}>
+        
+        <option value="newest">החדש ביותר</option>
+        <option value="oldest">הוותיק ביותר</option>
+      </select>
+        </div>
+        <input
         type="text"
         className=" text-black p-3 rounded-lg uppercase text-center hover:opacity-95 flex justify-end shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)]"
         placeholder="חיפוש מודעה"
         onChange={handleSearch}
         value={searchTerm}
       />
+      </div>
+      
+      
     </div>
       
       {filteredListings.length > 0 ? (

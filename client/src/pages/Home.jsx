@@ -51,11 +51,11 @@ export default function Home() {
       <span className="p-3">v 1.1 אתר בפיתוח </span>
 
       <div className="flex flex-col gap-6 p-110 px-3 max-w-6xl mx-auto">
-        <h1 className="text-black font-bold text-3xl lg:text-6xl text-right">
+        <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl text-right">
           ברוכים הבאים <br />
           למקום הטוב ביותר לשחקני איירסופט
         </h1>
-        <div className="text-gray-900 text-right text-xs sm:text-sm">
+        <div className="text-gray-500 text-right text-xs sm:text-sm">
           בהמשך לפיתוח אתר תוכלו להנות ממגוון שירותים שהמון זמן רציתם 
           <br />
           משחקים גדולים ,הצטרפות לקבוצה, מידה לשחקנים חדשים

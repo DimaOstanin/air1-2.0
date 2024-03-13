@@ -130,17 +130,22 @@ export default function Listing() {
                 - תיאור{" "}
               </span>
             </p>
-            <div>
+            <hr></hr>
+            <div className="m-3 flex flex-row justify-end space-x-20">
               <a
                 href={`https://wa.me/${currentUser.phone}?text=${window.location.href}`}
                 className="whatsapp_float"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i className="fa fa-whatsapp whatsapp-icon"></i>
+                <WhatsappIcon borderRadius="25" />
               </a>
+              <h1 className="text-center mt-1 text-2xl font-semibold">צור קשר עם המוכר</h1>
+
             </div>
-            {currentUser && listing.userRef !== currentUser._id && !contact && (
+            <hr></hr>
+            {/* <div>
+               {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact(true)}
                 className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
@@ -149,23 +154,27 @@ export default function Listing() {
               </button>
             )}
             {contact && <Contact listing={listing} />}
+            </div> */}
+           
           </div>
         </div>
       )}
-      <div className="flex justify-around p-3 ">
+      
+      <div className="flex justify-end space-x-20 p-3 ">
         <TelegramShareButton url={shareUrl}>
           <TelegramIcon borderRadius="25" />
         </TelegramShareButton>
         <WhatsappShareButton url={shareUrl}>
           <WhatsappIcon borderRadius="25" />
         </WhatsappShareButton>
-        <h1 className="text-center mt-7 text-2xl font-semibold">שיתוף</h1>
+        <h1 className="text-center mt-1 text-2xl font-semibold">שיתוף מודעה</h1>
       </div>
+
       <button
         onClick={handleShowListings}
-        className="text-green-700 w-full bg-yellow-300   rounded-lg uppercase hover:opacity-95 p-3"
+        className="text-black w-full bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 p-3 rounded-lg uppercase text-center hover:opacity-95"
       >
-        הצג מודעות של מוכר{" "}
+        הצג מודעות של מוכר
       </button>
       <div>
         {userListings && userListings.length > 0 && (
