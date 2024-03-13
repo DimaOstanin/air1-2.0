@@ -14,12 +14,8 @@ import {
   WhatsappIcon,
 } from "react-share";
 
-import Contact from "../components/Contact";
-
-// https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
-
 export default function Listing() {
-  const shareUrl = "https://www.npmjs.com/package/react-share"; // window.location.href
+  const shareUrl = window.location.href; 
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
