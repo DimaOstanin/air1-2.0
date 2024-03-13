@@ -23,17 +23,17 @@ export default function Header() {
     }
   }, [location.search]);
   return (
-    <header className='bg-slate-200 shadow-md'>
+    <header className='bg-gradient-to-r from-green-700 via-green-500 to-green-800'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
         <Link to='/'>
-          <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
+          <h1 className='font-bold items-center text-sm sm:text-xl flex flex-wrap'>
           <img src="../images/israel.png" alt="israel-flag" className='h-9 '/>
-            <span className='text-slate-500'>AIRSOFT-</span>
+            <span className='text-green-900 text-center'>AIRSOFT-</span>
             <span className='text-slate-700'>1</span>
             
           </h1>
         </Link>
-        <form
+        {/* <form
           onSubmit={handleSubmit}
           className='bg-slate-100 p-3 rounded-lg flex items-center'
         >
@@ -47,20 +47,20 @@ export default function Header() {
           <button>
             <FaSearch className='text-slate-600' />
           </button>
-        </form>
+        </form> */}
         <ul className='flex gap-4'>
-          <Link to='/'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
+          {/* <Link to='/'>
+            <li className=' text-slate-700 hover:underline'>
               בית
             </li>
-          </Link>
+          </Link> */}
           <Link to='/shuk'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
+            <li className=' text-slate-700 hover:underline'>
             שוק 
             </li>
           </Link>
           <Link to='/about'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
+            <li className=' text-slate-700 hover:underline'>
             אודות
             </li>
           </Link>

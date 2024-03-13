@@ -4,4 +4,10 @@
 
 body{
     background-color: rgb(241, 245, 241);
+     /* background-image: url('../images/multicam_prototypev1.jpg'); */
+  /* background-size: cover; */
+  /* background-repeat: repeat; */
+  /* background-color: rgba(0, 0, 0, 0.9); 
+  background-blend-mode: multiply;
+   */
 }

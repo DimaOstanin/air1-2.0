@@ -8,8 +8,10 @@ import "swiper/css/bundle";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaShare } from "react-icons/fa";
 import {
-  TelegramShareButton,TelegramIcon,
-  WhatsappShareButton,WhatsappIcon,
+  TelegramShareButton,
+  TelegramIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
 } from "react-share";
 
 import Contact from "../components/Contact";
@@ -25,17 +27,14 @@ export default function Listing() {
   const [copied, setCopied] = useState(false);
   const [contact, setContact] = useState(false);
   const [userListings, setUserListings] = useState([]);
-  console.log(userListings)
+  console.log(userListings);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
-    
     fetchListing();
-    UserListings();
   }, [params.listingId]);
 
-  
   const fetchListing = async () => {
     try {
       setLoading(true);
@@ -54,7 +53,7 @@ export default function Listing() {
       setLoading(false);
     }
   };
-  const UserListings = async () => {
+  const handleShowListings = async () => {
     try {
       const res = await fetch(`/api/user/listings/${listing.userRef}`);
       const data = await res.json();
@@ -65,12 +64,12 @@ export default function Listing() {
       setUserListings(data);
     } catch (error) {}
   };
-  
+
   return (
     <main>
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
       {error && (
-        <p className="text-center my-7 text-2xl">Something  went wrong!</p>
+        <p className="text-center my-7 text-2xl">Something went wrong!</p>
       )}
       {listing && !loading && !error && (
         <div>
@@ -113,14 +112,15 @@ export default function Listing() {
               {listing.address}
             </p>
             <div className="flex gap-4 justify-end">
-              <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                {listing.company}
+              <p className="bg-red-600 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                {listing.condition}
               </p>
-              <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+              <p className="bg-red-600 w-full max-w-[200px] text-white text-center p-1 rounded-md">
                 {listing.category}
               </p>
-              <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                {listing.condition}
+
+              <p className="bg-red-600 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                {listing.company}
               </p>
             </div>
             <p className="flex text-slate-800 justify-end">
@@ -130,7 +130,16 @@ export default function Listing() {
                 - תיאור{" "}
               </span>
             </p>
-
+            <div>
+              <a
+                href={`https://wa.me/${currentUser.phone}?text=${window.location.href}`}
+                className="whatsapp_float"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="fa fa-whatsapp whatsapp-icon"></i>
+              </a>
+            </div>
             {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact(true)}
@@ -143,21 +152,26 @@ export default function Listing() {
           </div>
         </div>
       )}
-      <div className="flex justify-around ">
-      <TelegramShareButton url={shareUrl}>
-          <TelegramIcon />
+      <div className="flex justify-around p-3 ">
+        <TelegramShareButton url={shareUrl}>
+          <TelegramIcon borderRadius="25" />
         </TelegramShareButton>
         <WhatsappShareButton url={shareUrl}>
-          <WhatsappIcon />
+          <WhatsappIcon borderRadius="25" />
         </WhatsappShareButton>
         <h1 className="text-center mt-7 text-2xl font-semibold">שיתוף</h1>
-
       </div>
+      <button
+        onClick={handleShowListings}
+        className="text-green-700 w-full bg-yellow-300   rounded-lg uppercase hover:opacity-95 p-3"
+      >
+        הצג מודעות של מוכר{" "}
+      </button>
       <div>
         {userListings && userListings.length > 0 && (
           <div className="flex flex-col gap-4">
             <h1 className="text-center mt-7 text-2xl font-semibold">
-              מוצרים של המוכר{" "}
+              מודעות של מוכר{" "}
             </h1>
             {userListings.map((listing) => (
               <Link key={listing._id} to={`/listing/${listing._id}`}>

@@ -67,8 +67,20 @@ export default function Profile() {
   };
 
   const handleChange = (e) => {
+  
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+  const handleChangePhone = (e)=> {
+    if (e.target.value.startsWith("0")) { 
+      let modifiedNumber = "972" + e.target.value.slice(1); 
+      return setFormData({ ...formData, [e.target.id]: modifiedNumber });
+    } else if (e.target.value.startsWith("972")) {   
+      return setFormData({ ...formData, [e.target.id]:  e.target.value });
+    } else {
+      return setFormData({ ...formData, [e.target.id]: e.target.value });
+    }
+  }
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -161,7 +173,7 @@ export default function Profile() {
     }
   };
   return (
-    <div className="p-3 max-w-lg mx-auto">
+    <div className=" shadow-[inset_-12px_-8px_40px_#46464620] p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">פרופיל</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
@@ -219,7 +231,7 @@ export default function Profile() {
           id="phone"
           defaultValue={currentUser.phone}
           className="border p-3 rounded-lg direction-rtl text-right"
-          onChange={handleChange}
+          onChange={handleChangePhone}
         />
         <input
           type="address"
@@ -235,11 +247,15 @@ export default function Profile() {
         >
           {loading ? "טוען..." : "עדכון"}
         </button>
+        <p className="text-red-700 mt-0.1">{error ? error : ""}</p>
+        <p className="text-green-700 mt-0.1 text-right">
+          {updateSuccess ? "המשתמש עודכן בהצלחה!" : ""}
+        </p>
         <Link
           className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
           to={"/create-listing"}
         >
-          ליצור מוצר
+          ליצור מודעה{" "}
         </Link>
       </form>
       <div className="flex justify-between mt-5">
@@ -254,12 +270,11 @@ export default function Profile() {
         </span>
       </div>
 
-      <p className="text-red-700 mt-5">{error ? error : ""}</p>
-      <p className="text-green-700 mt-5">
-        {updateSuccess ? "המשתמש עודכן בהצלחה!" : ""}
-      </p>
-      <button onClick={handleShowListings} className="text-green-700 w-full bg-yellow-300 p-3 rounded-lg uppercase text-center hover:opacity-95">
-      הצג מוצרים שלך
+      <button
+        onClick={handleShowListings}
+        className="text-black w-full bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 p-3 rounded-lg uppercase text-center hover:opacity-95"
+      >
+        הצג מודעות שלך
       </button>
       <p className="text-red-700 mt-5">
         {showListingsError ? "שגיאה בהצגת" : ""}
@@ -268,7 +283,7 @@ export default function Profile() {
       {userListings && userListings.length > 0 && (
         <div className="flex flex-col gap-4">
           <h1 className="text-center mt-7 text-2xl font-semibold">
-          מוצרים שלך
+            מודעות שלך{" "}
           </h1>
           {userListings.map((listing) => (
             <div
