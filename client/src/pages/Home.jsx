@@ -9,9 +9,9 @@ import ListingItem from "../components/ListingItem";
 export default function Home() {
   const [listings, setListings] = useState([]);
   const pistols = "אקדח";
-  const bigguns = "כלי חשמלי " || " כלי צלפים" || "כלי על גז" || "כלי HPA";
-  const accessories = "(על הכלי)אביזרים";
-  const spareParts = "(פנימי)חלקי חילוף";
+  const bigguns = "כלי חשמלי ";
+  const accessories = "(על הכלי) אביזרים";
+  const spareParts = "(פנימי) חלקי חילוף";
   SwiperCore.use([Navigation]);
   console.log(listings);
   useEffect(() => {
