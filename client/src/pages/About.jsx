@@ -16,7 +16,7 @@ export default function About() {
     </div>
     <h1 className='mb-4 text-slate-700 text-center uppercase'>אם יש לך משהו מעניין להציע להוסיף תוכן לאתר או עוד משהו מוכן להקשיב תמיד</h1>
     <hr></hr>
-      <Contact currentUser={currentUser}/>
+      <Contact />
       </div>
   )
 }

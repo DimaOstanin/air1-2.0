@@ -76,7 +76,7 @@ export default function Listing() {
                   className="h-[550px]"
                   style={{
                     background: `url(${url}) center no-repeat`,
-                    backgroundSize: "cover",
+                    backgroundSize: "contain",
                   }}
                 ></div>
               </SwiperSlide>
@@ -96,7 +96,7 @@ export default function Listing() {
           </div>
           {copied && (
             <p className="fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2">
-              Link copied!
+             הקישור הועתק!
             </p>
           )}
           <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
@@ -131,7 +131,7 @@ export default function Listing() {
           { currentUser && listing.userRef !== currentUser._id &&  <div className="m-3 flex flex-row justify-end space-x-20">
           <hr></hr>
               <a
-                href={`https://wa.me/${listing.userPhone}?text=${window.location.href}`}
+                href={`https://wa.me/${listing.userPhone}?text=${window.location.href +' '+ listing.name + ' '}שלום+זה+בקשר+למודעה`}
                 className="whatsapp_float"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -152,7 +152,7 @@ export default function Listing() {
         <TelegramShareButton url={shareUrl}>
           <TelegramIcon borderRadius="25" />
         </TelegramShareButton>
-        <WhatsappShareButton url={shareUrl}>
+        <WhatsappShareButton url={shareUrl} title={"  תראה מצאתי את"} >
           <WhatsappIcon borderRadius="25" />
         </WhatsappShareButton>
         <h1 className="text-center mt-1 text-2xl font-semibold">שיתוף מודעה</h1>

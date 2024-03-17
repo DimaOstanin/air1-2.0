@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Contact({ currentUser }) {
+export default function Contact() {
   // const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState("");
   const [subject, setSubject] = useState("");
@@ -59,11 +59,11 @@ export default function Contact({ currentUser }) {
 
         <Link
           to={`mailto:airsoft1israel@gmail.com?subject=${
-            currentUser.name + "   " + subject
+            "   " + subject
           }&body=${message}`}
           className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
         >
-          שלח הודעה
+          שלח אימייל 
         </Link>
       </div>
     </>

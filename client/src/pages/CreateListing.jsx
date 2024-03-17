@@ -33,7 +33,7 @@ export default function CreateListing() {
   const [loading, setLoading] = useState(false);
   console.log(formData);
   const handleImageSubmit = (e) => {
-    if (files.length > 0 && files.length + formData.imageUrls.length < 2) {
+    if (files.length > 0 && files.length + formData.imageUrls.length < 3) {
       setUploading(true);
       setImageUploadError(false);
       const promises = [];
@@ -55,7 +55,7 @@ export default function CreateListing() {
           setUploading(false);
         });
     } else {
-      setImageUploadError('אפשר להעלות רק תמונה אחת למודעה');
+      setImageUploadError('אפשר להעלות שתי תמונות');
       setUploading(false);
     }
   };

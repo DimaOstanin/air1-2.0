@@ -27,7 +27,7 @@ export default function Header() {
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
         <Link to='/'>
           <h1 className='font-bold items-center text-sm sm:text-xl flex flex-wrap'>
-          <img src="../images/israel.png" alt="israel-flag" className='h-9 '/>
+          {/* <img src="../images/israel.png" alt="israel-flag" className='h-9 '/> */}
             <span className='text-green-900 text-center'>AIRSOFT-</span>
             <span className='text-slate-700'>1</span>
             

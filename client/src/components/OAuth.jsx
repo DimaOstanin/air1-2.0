@@ -36,9 +36,9 @@ export default function OAuth() {
     <button
       onClick={handleGoogleClick}
       type='button'
-      className='bg-slate-300 border   text-slate-500 p-3 rounded-lg items-center uppercase hover:opacity-95 flex flex-row justify-between text-center'
+      className='bg-slate-300 border   text-slate-500 p-3 rounded-lg items-center uppercase hover:opacity-95 flex flex-row justify-center text-center'
     >
-      <img src="../../images/googleg.png" alt="google" className="flex  h-10 justify-center" />
+      {/* <img src="../../images/googleg.png" alt="google" className="flex  h-10 justify-center" /> */}
       <p className="flex text-center ">המשך עם גוגל</p>
     </button>
   );
