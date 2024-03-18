@@ -7,6 +7,8 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+import { Button, Modal } from "flowbite-react";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 import {
   updateUserStart,
   updateUserSuccess,
@@ -22,6 +24,7 @@ import { Link } from "react-router-dom";
 export default function Profile() {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
+  const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
@@ -68,20 +71,18 @@ export default function Profile() {
   };
 
   const handleChange = (e) => {
-  
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-  const handleChangePhone = (e)=> {
-    if (e.target.value.startsWith("0")) { 
-      let modifiedNumber = "972" + e.target.value.slice(1); 
+  const handleChangePhone = (e) => {
+    if (e.target.value.startsWith("0")) {
+      let modifiedNumber = "972" + e.target.value.slice(1);
       return setFormData({ ...formData, [e.target.id]: modifiedNumber });
-    } else if (e.target.value.startsWith("972")) {   
-      return setFormData({ ...formData, [e.target.id]:  e.target.value });
+    } else if (e.target.value.startsWith("972")) {
+      return setFormData({ ...formData, [e.target.id]: e.target.value });
     } else {
       return setFormData({ ...formData, [e.target.id]: e.target.value });
     }
-  }
-  
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -252,32 +253,80 @@ export default function Profile() {
         <p className="text-green-700 mt-0.1 text-right">
           {updateSuccess ? "המשתמש עודכן בהצלחה!" : ""}
         </p>
-        {currentUser.phone? <Link
-          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
-          to={"/create-listing"}
-        >
-          להקים מודעה {" "}
-        </Link> :
-         <p className="flex justify-center">יש להשלים נתונים בשביל להקים מודעה</p>}
+        {currentUser.phone ? (
+          <Link
+            className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
+            to={"/create-listing"}
+          >
+            להקים מודעה{" "}
+          </Link>
+        ) : (
+          <p className="flex justify-center">
+            יש להשלים נתונים בשביל להקים מודעה
+          </p>
+        )}
       </form>
       <div className="flex justify-between mt-5">
         <span
-          onClick={handleDeleteUser}
+          onClick={() => setShowModal(true)}
           className="text-red-700 cursor-pointer"
         >
           מחק חשבון
         </span>
+        <div>
+          {showModal ? (
+            <>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    <div className="flex items-end  p-5 border-b border-solid border-blueGray-200 rounded-t">
+                      <h3 className="text-3xl flex font-semibold text-center justify-end">
+                        {" "}
+                        ?למחוק משתמש
+                      </h3>
+                      <button
+                        className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        onClick={() => setShowModal(false)}
+                      >
+                        <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                          ×
+                        </span>
+                      </button>
+                    </div>
+                    <div className="flex items-center  p-4 border-t border-solid border-blueGray-200 rounded-b">
+                      <button
+                        className="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => setShowModal(false)}
+                      >
+                        ביטול
+                      </button>
+                      <button
+                        className="bg-red-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={handleDeleteUser}
+                      >
+                        כן למחוק
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+            </>
+          ) : null}
+        </div>
         <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
           התנתק
         </span>
       </div>
 
-         <button
-          onClick={handleShowListings}
-          className="text-black w-full bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 p-3 rounded-lg uppercase text-center hover:opacity-95"
-        >
-          הצג מודעות שלך
-        </button>
+      <button
+        onClick={handleShowListings}
+        className="text-black w-full bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 p-3 rounded-lg uppercase text-center hover:opacity-95"
+      >
+        הצג מודעות שלך
+      </button>
       <p className="text-red-700 mt-5">
         {showListingsError ? "שגיאה בהצגת" : ""}
       </p>
@@ -290,7 +339,7 @@ export default function Profile() {
           {userListings.map((listing) => (
             <div
               key={listing._id}
-              className="border rounded-lg p-3 flex justify-between items-center gap-4"
+              className="border border-slate-400 rounded-lg p-3 flex justify-between items-center gap-4"
             >
               <Link to={`/listing/${listing._id}`}>
                 <img
@@ -306,7 +355,7 @@ export default function Profile() {
                 <p>{listing.name}</p>
               </Link>
 
-              <div className="flex flex-col item-center">
+              <div className="flex flex-row  item-center">
                 <button
                   onClick={() => handleListingDelete(listing._id)}
                   className="text-red-700 uppercase"
@@ -314,7 +363,7 @@ export default function Profile() {
                   למחוק
                 </button>
                 <Link to={`/update-listing/${listing._id}`}>
-                  <button className="text-green-700 uppercase">עריכה</button>
+                  <button className="text-green-700 uppercase m-4">עריכה</button>
                 </Link>
               </div>
             </div>
