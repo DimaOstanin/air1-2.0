@@ -3,7 +3,7 @@ import { app } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { signInSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
-
+import {getRandomNumber} from '../utils/utils'
 export default function OAuth() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,6 +23,8 @@ export default function OAuth() {
           name: result.user.displayName,
           email: result.user.email,
           photo: result.user.photoURL,
+          phone: getRandomNumber(99,9999),
+          
         }),
       });
       const data = await res.json();

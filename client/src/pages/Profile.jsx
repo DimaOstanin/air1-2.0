@@ -7,8 +7,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
-import { Button, Modal } from "flowbite-react";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
+
 import {
   updateUserStart,
   updateUserSuccess,
@@ -253,7 +252,7 @@ export default function Profile() {
         <p className="text-green-700 mt-0.1 text-right">
           {updateSuccess ? "המשתמש עודכן בהצלחה!" : ""}
         </p>
-        {currentUser.phone ? (
+        {currentUser.phone.length > 6 ? (
           <Link
             className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
             to={"/create-listing"}
@@ -262,7 +261,7 @@ export default function Profile() {
           </Link>
         ) : (
           <p className="flex justify-center">
-            יש להשלים נתונים בשביל להקים מודעה
+            יש לתקן מספר טלפון בשביל להקים מודעות{" "}
           </p>
         )}
       </form>
@@ -363,7 +362,9 @@ export default function Profile() {
                   למחוק
                 </button>
                 <Link to={`/update-listing/${listing._id}`}>
-                  <button className="text-green-700 uppercase m-4">עריכה</button>
+                  <button className="text-green-700 uppercase m-4">
+                    עריכה
+                  </button>
                 </Link>
               </div>
             </div>

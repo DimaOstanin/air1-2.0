@@ -20,7 +20,7 @@ export default function CreateListing() {
     imageUrls: [],
     name: '',
     description: '',
-    address: '',
+    address: currentUser.address,
     company:'',
     condition: '',
     category: '',
