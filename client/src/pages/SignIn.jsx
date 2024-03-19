@@ -48,14 +48,14 @@ export default function SignIn() {
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
           type='email'
-          placeholder='email'
+          placeholder='אימייל'
           className='border p-3 rounded-lg'
           id='email'
           onChange={handleChange}
         />
         <input
           type='password'
-          placeholder='password'
+          placeholder='סיסמה'
           className='border p-3 rounded-lg'
           id='password'
           onChange={handleChange}
@@ -70,12 +70,12 @@ export default function SignIn() {
         
         <OAuth/>
       </form>
-      <div className='flex gap-2 mt-5  justify-end'>
+      <div className='flex gap-2 mt-5  '>
+        
+        <p>אין לך חשבון?</p>
         <Link to={'/sign-up'}>
           <span className='text-blue-700'>הירשם</span>
         </Link>
-        <p>?אין לך חשבון</p>
-
       </div>
       {error && <p className='text-red-500 mt-5'>{error}</p>}
     </div>

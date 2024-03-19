@@ -355,17 +355,18 @@ export default function Profile() {
               </Link>
 
               <div className="flex flex-row  item-center">
-                <button
-                  onClick={() => handleListingDelete(listing._id)}
-                  className="text-red-700 uppercase"
-                >
-                  למחוק
-                </button>
-                <Link to={`/update-listing/${listing._id}`}>
-                  <button className="text-green-700 uppercase m-4">
+              <Link to={`/update-listing/${listing._id}`}>
+                  <button className="bg-green-700 text-white p-3 m-1 rounded-lg uppercase text-center hover:opacity-95">
                     עריכה
                   </button>
                 </Link>
+                <button
+                  onClick={() => handleListingDelete(listing._id)}
+                  className="bg-red-700 text-white p-3 m-1 rounded-lg uppercase text-center hover:opacity-95"
+                >
+                  למחוק
+                </button>
+                
               </div>
             </div>
           ))}

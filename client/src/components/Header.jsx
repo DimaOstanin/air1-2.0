@@ -25,13 +25,7 @@ export default function Header() {
   return (
     <header className="bg-slate-200 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
-        <Link to="/">
-          <h1 className="font-bold items-center text-sm sm:text-xl flex flex-wrap">
-            {/* <img src="../images/israel.png" alt="israel-flag" className='h-9 '/> */}
-            <span className="text-green-900 text-center">AIRSOFT-</span>
-            <span className="text-slate-700">1</span>
-          </h1>
-        </Link>
+       
         {/* <form
           onSubmit={handleSubmit}
           className='bg-slate-100 p-3 rounded-lg flex items-center'
@@ -49,15 +43,10 @@ export default function Header() {
         </form> */}
         <ul className="flex gap-4">
           
-          <Link to="/shuk">
-            <li className=" text-slate-700 hover:underline">שוק</li>
-          </Link>
+          
           {/* <Link to="/areas">
             <li className=" text-slate-700 hover:underline">area </li>
           </Link> */}
-          <Link to="/about">
-            <li className=" text-slate-700 hover:underline">אודות</li>
-          </Link>
           <Link to="/profile">
             {currentUser ? (
               <img
@@ -69,7 +58,22 @@ export default function Header() {
               <li className=" text-slate-700 hover:underline"> להתחבר</li>
             )}
           </Link>
+          <Link to="/about">
+            <li className=" text-slate-700 hover:underline">אודות</li>
+          </Link>
+          
+          <Link to="/shuk">
+            <li className=" text-slate-700 hover:underline">שוק</li>
+          </Link>
         </ul>
+        <Link to="/">
+          <h1 className="font-bold items-center text-sm sm:text-xl flex flex-wrap">
+            {/* <img src="../images/israel.png" alt="israel-flag" className='h-9 '/> */}
+            <span className="text-slate-700">1-</span>
+            <span className="text-green-900 text-center">AIRSOFT</span>
+            
+          </h1>
+        </Link>
       </div>
     </header>
   );
