@@ -11,24 +11,10 @@ export const createArea = async (req, res, next) => {
   }
 };
 
-export const deleteArea = async (req, res, next) => {
-  const area = await Area.findById(req.params.id);
-
-  if (!area) {
-    return next(errorHandler(404, 'Area not found!'));
-  }
-
-  try {
-    await area.findByIdAndDelete(req.params.id);
-    res.status(200).json('Area has been deleted!');
-  } catch (error) {
-    next(error);
-  }
-};
 
 export const updateArea = async (req, res, next) => {
   const area = await Area.findById(req.params.id);
-  if (area) {
+  if (!area) {
     return next(errorHandler(404, 'Area not found!'));
   }
   try {
@@ -57,11 +43,11 @@ export const getArea = async (req, res, next) => {
 
 export const getAllAreas = async (req, res, next) => {
   try {
-    const area = await Area.find({});
-    if (!area) {
+    const areas = await Area.find({});
+    if (!areas) {
       return next(errorHandler(404, 'Area not found!'));
     }
-    res.status(200).json(Area);
+    res.status(200).json(areas);
   } catch (error) {
     next(error);
   }

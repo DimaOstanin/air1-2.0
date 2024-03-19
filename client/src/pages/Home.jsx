@@ -45,7 +45,7 @@ export default function Home() {
   return (
     <div className="">
       {/* top */}
-      <span className="p-3">v 1.1 אתר בפיתוח </span>
+      <span className=" flex justify-end"> אתר בפיתוח v 1.1</span>
 
       <div className="flex flex-col gap-6 p-110 px-3 max-w-6xl mx-auto">
         <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl text-right">
